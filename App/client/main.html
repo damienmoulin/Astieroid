@@ -4,9 +4,7 @@
 
 <body>
   <h1>Welcome to Meteor!</h1>
-
-  {{> tchat }}
-  {{> form }}
+  {{> Template.dynamic template=currentPage}}
 </body>
 
 <template name="tchat">
@@ -15,11 +13,18 @@
       <li>{{ name }} : {{ message }}</li>
     {{/each}}
   </ul>
+  {{> form }}
+</template>
+
+<template name="connexion">
+  <form>
+    <input type="text" name="name" placeholder="Name">
+    <input type="submit" value="Set Name">
+  </form>
 </template>
 
 <template name="form">
   <form>
-    <input type="text" name="name" placeholder="Name">
     <input type="text" name="message" placeholder="Message">
     <input type="submit" value="Add message">
   </form>
