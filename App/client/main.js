@@ -44,7 +44,9 @@ if(Meteor.isClient) {
                 if (splited[0].includes("@")) {
                     var b = splited[0].split("@");
                     var destinataire = b[1];
-                    var message = splited[1];
+                    splited.splice(0,1);
+                    var tostring = splited.toString();
+                    var message = tostring.replace(/,/g,' ')
                 }
                 else {
                     var message = input;
