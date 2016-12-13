@@ -29,7 +29,7 @@ if(Meteor.isClient) {
         {
             'click .user_name': function (event) {
                 var target = event.target.innerText;
-                $('input#dest').val(target);
+                $('input#message').val('@'+target+' ');
             }
         }
     );
@@ -38,8 +38,18 @@ if(Meteor.isClient) {
         {
             'submit form': function (event) {
                 event.preventDefault();
-                var message = event.target.message.value;
-                var destinataire = event.target.destinataire.value;
+                var input = event.target.message.value;
+                var splited = input.split(" ");
+
+                if (splited[0].includes("@")) {
+                    var b = splited[0].split("@");
+                    var destinataire = b[1];
+                    var message = splited[1];
+                }
+                else {
+                    var message = input;
+                }
+
                 Messages.insert(
                     {
                         destinataire : destinataire,
