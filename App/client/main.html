@@ -8,17 +8,15 @@
 </body>
 
 <template name="tchat">
-  <ul>
     {{#each all_messages}}
-      <li>
+      <div class="bloc">
         {{#if destinataire}}
-        <span class="private"><span class="user_name">{{ name }}</span> à {{ destinataire }} : {{ message }}</span>
+        <span class="msg_elm private"><span class="elm_header"><span class="user_name">{{ name }}</span> à {{ destinataire }} :</span> {{ message }}</span>
         {{ else }}
-        <span class="user_name">{{ name }}</span> : {{ message }}
+        <span class="msg_elm public"><span class="elm_header"><span class="user_name">{{ name }}</span> :</span> {{ message }}</span>
         {{/if}}
-      </li>
+      </div>
     {{/each}}
-  </ul>
   {{> form }}
 </template>
 
@@ -30,9 +28,11 @@
 </template>
 
 <template name="form">
-  <form>
-    <input id="message" type="text" name="message" placeholder="Message">
-    <input type="submit" value="Add message">
+  <form class="form-inline">
+    <div class="form-group">
+      <input class="form-control" id="message" type="text" name="message" placeholder="Message">
+      <input class="form-control" type="submit" value="Add message">
+    </div>
   </form>
 </template>
 
