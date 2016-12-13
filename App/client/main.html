@@ -5,7 +5,8 @@
 <body>
   <h1>Welcome to Meteor!</h1>
 
-  {{> tchat}}
+  {{> tchat }}
+  {{> form }}
 </body>
 
 <template name="tchat">
@@ -14,5 +15,13 @@
       <li>{{ name }} : {{ message }}</li>
     {{/each}}
   </ul>
+</template>
+
+<template name="form">
+  <form>
+    <input type="text" name="name" placeholder="Name">
+    <input type="text" name="message" placeholder="Message">
+    <input type="submit" value="Add message">
+  </form>
 </template>
 

@@ -3,4 +3,5 @@
 !/App/package.json
 !/App/server/
 !/App/.meteor/
+!/App/lib
 .idea
