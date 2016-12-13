@@ -1,9 +1,64 @@
-Template.tchat.helpers(
-    {
-        all_messages : function()
-        {
-            return Messages.find();
-        }
-    }
-);
+if(Meteor.isClient) {
+    Session.setDefault('page', 'connexion');
 
+    Template.body.helpers({
+        currentPage: function (page) {
+            return Session.get('page')
+        }
+    });
+
+    Template.connexion.events(
+        {
+            'submit form': function(event) {
+                event.preventDefault();
+                name = event.target.name.value;
+                Session.set('page', 'tchat');
+            }
+        }
+    );
+
+    Template.tchat.helpers(
+        {
+            all_messages: function () {
+                return Messages.find({$or: [{ destinataire: name}, { destinataire: ''}, { name: name}]});
+            }
+        }
+    );
+
+    Template.tchat.events(
+        {
+            'click .user_name': function (event) {
+                var target = event.target.innerText;
+                $('input#message').val('@'+target+' ');
+            }
+        }
+    );
+
+    Template.form.events(
+        {
+            'submit form': function (event) {
+                event.preventDefault();
+                var input = event.target.message.value;
+                var splited = input.split(" ");
+
+                if (splited[0].includes("@")) {
+                    var b = splited[0].split("@");
+                    var destinataire = b[1];
+                    var message = splited[1];
+                }
+                else {
+                    var message = input;
+                }
+
+                Messages.insert(
+                    {
+                        destinataire : destinataire,
+                        name: name,
+                        message: message
+                    }
+                );
+                event.target.message.value = '';
+            }
+        }
+    );
+}
