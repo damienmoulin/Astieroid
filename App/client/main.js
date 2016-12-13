@@ -49,6 +49,7 @@ if(Meteor.isClient) {
                     var message = tostring.replace(/,/g,' ')
                 }
                 else {
+                    var destinataire = '';
                     var message = input;
                 }
 
