@@ -1,4 +1,23 @@
 /* CSS declarations go here */
+.bloc {
+    display: block;
+    padding:20px;
+}
+.msg_elm {
+    padding:15px;
+    margin:5px;
+}
 .private {
-    color:blue;
+    background: #6AB7EB;
+    border-radius: 20px;
+}
+.public {
+    background : #D0F8CB;
+    border-radius: 20px;
+}
+form {
+    padding:20px;
+}
+.elm_header {
+    font-weight: bold;
 }
