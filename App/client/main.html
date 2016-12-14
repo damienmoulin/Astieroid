@@ -3,7 +3,6 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
   {{> Template.dynamic template=currentPage}}
 </body>
 
@@ -17,6 +16,14 @@
         {{/if}}
       </div>
     {{/each}}
+
+  <div class="bloc">
+    Users :
+    {{#each users}}
+      <span class="label label-info user_name">{{ name }}</span>
+    {{/each}}
+  </div>
+
   {{> form }}
 </template>
 
