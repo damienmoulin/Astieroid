@@ -1,6 +1,14 @@
 if(Meteor.isClient) {
     Session.setDefault('page', 'connexion');
 
+    $(window).bind('beforeunload', function() {
+        closingWindow();
+        return null;
+    });
+    closingWindow = function(){
+        Meteor.call('deleteUser', id);
+    };
+
     Template.body.helpers({
         currentPage: function (page) {
             return Session.get('page')
@@ -12,6 +20,12 @@ if(Meteor.isClient) {
             'submit form': function(event) {
                 event.preventDefault();
                 name = event.target.name.value;
+
+                id = Users.insert(
+                    {
+                        name : name
+                    }
+                );
                 Session.set('page', 'tchat');
             }
         }
@@ -21,6 +35,9 @@ if(Meteor.isClient) {
         {
             all_messages: function () {
                 return Messages.find({$or: [{ destinataire: name}, { destinataire: ''}, { name: name}]});
+            },
+            users: function () {
+                return Users.find();
             }
         }
     );

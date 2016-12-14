@@ -8,6 +8,13 @@
 </body>
 
 <template name="tchat">
+  <ul>
+    Users :
+    {{#each users}}
+    <span class="label label-info">{{ name }}</span>
+    {{/each}}
+  </ul>
+
     {{#each all_messages}}
       <div class="bloc">
         {{#if destinataire}}
